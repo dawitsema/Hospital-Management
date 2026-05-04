@@ -1,58 +1,39 @@
 # Hospital Appointment System
 
-Full-stack coursework project: **React (Vite)** SPA, **Node.js (Express)** REST API, **MongoDB** (Mongoose), and **GitHub** for version control. Includes **JWT authentication**, **role-based access** (`patient`, `doctor`, `admin`), and **dashboards** for each role.
+Production-ready hospital appointment platform built with **React (Vite)**, **Node.js (Express)**, and **MongoDB Atlas**. The system provides secure authentication, role-based access (`patient`, `doctor`, `admin`), and dashboards tailored to each role.
 
-## Prerequisites
+## Live deployment
 
-- Node.js 20+ recommended
-- MongoDB running locally or a MongoDB Atlas URI
+- **Frontend (Vercel):** add your production URL
+- **Backend (Render):** add your production URL
+- **API health:** `<render-url>/api/health`
 
-## Quick start
+## How it works
 
-### 1. API (server)
+1. **Authentication and authorization**
+   - Users sign in with JWT-based authentication.
+   - Access is controlled by role (`patient`, `doctor`, `admin`).
 
-```bash
-cd server
-cp .env.example .env
-# Edit .env: set MONGODB_URI and JWT_SECRET
-npm install
-npm run seed   # optional: demo users + sample appointment
-npm run dev
-```
+2. **Patient flow**
+   - Patients register and sign in.
+   - They select a doctor, date, and available slot to request an appointment.
+   - They can view upcoming/past appointments and cancel or reschedule allowed bookings.
 
-API listens on **http://localhost:5000** by default.
+3. **Doctor flow**
+   - Doctors define weekly availability windows.
+   - Incoming requests can be approved, declined, rescheduled, or marked completed.
+   - Doctors receive and manage relevant notifications.
 
-### 2. Web app (client)
+4. **Admin flow**
+   - Admins manage users and doctor accounts.
+   - Admins monitor appointments and overall stats.
+   - Admins can intervene in appointment status management when needed.
 
-In a second terminal:
+5. **Notifications**
+   - The system notifies users for major appointment state changes (request, approval, decline, cancel, complete, reschedule).
 
-```bash
-cd client
-cp .env.example .env
-# Leave VITE_API_URL empty to use the Vite dev proxy to :5000
-npm install
-npm run dev
-```
-
-Open **http://localhost:5173**. The Vite dev server proxies `/api` to the API.
-
-### 3. Demo accounts (after `npm run seed`)
-
-| Role    | Email                   | Password      |
-| ------- | ------------------------- | ------------- |
-| Admin   | `admin@hospital.test`     | `password123` |
-| Doctor  | `dr.smith@hospital.test`  | `password123` |
-| Doctor  | `dr.jones@hospital.test`  | `password123` |
-| Patient | `patient@hospital.test`   | `password123` |
-
-New **patient** accounts can also be created from the **Register** screen (always created as `patient`).
-
-## Demo script (for report or presentation)
-
-1. Run seed, start API and client as above.
-2. Sign in as **patient** → request an appointment (Mon–Sat, future slot in Addis clinic hours); it stays **pending** until approved.
-3. Sign in as **dr.smith** (doctor) → **Approve** or **Decline** pending requests; for confirmed visits, mark **completed** or **cancel**. Check the notification bell.
-4. Sign in as **admin** → **Users** / **Appointments** tabs; admins can also approve or decline pending requests. Notifications fire for both sides on key changes.
+6. **Localization**
+   - Language switcher supports **English** and **Amharic**.
 
 ## API overview
 
@@ -62,33 +43,59 @@ New **patient** accounts can also be created from the **Register** screen (alway
 | POST | `/api/auth/register` | No | Create patient account; returns JWT |
 | POST | `/api/auth/login` | No | Login; returns JWT |
 | GET | `/api/me` | Yes | Current user profile |
-| PATCH | `/api/me` | Yes | Update `name` and/or `newPassword` (requires `currentPassword` when changing password) |
-| GET | `/api/doctors` | No | List doctors (for booking) |
+| PATCH | `/api/me` | Yes | Update profile/password |
+| GET | `/api/doctors` | No | List doctors |
 | GET | `/api/appointments` | Yes | Patient: own; Doctor: assigned; Admin: all |
-| POST | `/api/appointments` | Patient | Request booking → `pending` (Addis clinic hours, no past slots, overlap check) |
-| PATCH | `/api/appointments/:id` | Yes | Doctor/Admin: approve (`scheduled`) / decline (`rejected`); status updates notify patient & doctor |
-| GET | `/api/notifications` | Yes | List notifications + `unreadCount` |
-| PATCH | `/api/notifications/:id/read` | Yes | Mark one notification read |
-| POST | `/api/notifications/read-all` | Yes | Mark all read |
+| POST | `/api/appointments` | Patient | Create appointment request |
+| PATCH | `/api/appointments/:id` | Yes | Update appointment status/time |
+| GET | `/api/notifications` | Yes | List notifications + unread count |
+| PATCH | `/api/notifications/:id/read` | Yes | Mark one as read |
+| POST | `/api/notifications/read-all` | Yes | Mark all as read |
 | GET | `/api/users` | Admin | List users |
-| POST | `/api/admin/doctors` | Admin | Create doctor account (email, password, name, optional specialty) |
+| POST | `/api/admin/doctors` | Admin | Create doctor account |
 
 Send `Authorization: Bearer <token>` on protected routes.
 
-## Security notes (for documentation)
+## Environment configuration
 
-- Passwords hashed with **bcryptjs**; JWT signed with **HS256** using `JWT_SECRET`.
-- **CORS** restricted to `CLIENT_ORIGIN` (default `http://localhost:5173`).
-- Public registration creates **patients only**; staff roles come from seeding or future admin tooling.
+### Server (`server/.env`)
 
-## GitHub / CI
+- `MONGODB_URI` = MongoDB Atlas connection string
+- `JWT_SECRET` = long random secret
+- `CLIENT_ORIGIN` = your Vercel frontend URL
+- `PORT` = provided by hosting platform or default local port
 
-Push this repository to GitHub. CI (`.github/workflows/ci.yml`) runs **server lint** and **client production build** on push and pull requests.
+### Client (`client/.env`)
+
+- `VITE_API_URL` = your Render backend base URL (no trailing slash)
+
+## Tech stack
+
+- **Frontend:** React, React Router, Vite
+- **Backend:** Node.js, Express
+- **Database:** MongoDB (Mongoose)
+- **Auth/Security:** JWT, bcrypt, CORS
+- **Deployment:** Vercel + Render + MongoDB Atlas
+
+## Developed by (Group Work)
+
+1. Dawit Sema - ETS 0455/14  
+2. Dawit Berhanu - ETS 0457/14  
+3. Delal Mohammad - ETS 0482/14  
+4. Eden Melaku - ETS 0496/14  
+5. Eyerusalem Kidane - ETS 0574/14  
+6. Gelila Nebiyu - ETS 0690/14  
+
+## Academic context
+
+- **Course:** Software Evolution and Maintence
+- **Instructor:** Hayelom Muleta
+- **University:** Addis Ababa Science and Technology University
 
 ## Project layout
 
-- [`client/`](client/) — React SPA (Vite)
-- [`server/`](server/) — Express API, Mongoose models, seed script
+- [`client/`](client/) - React SPA (Vite)
+- [`server/`](server/) - Express API and MongoDB models
 
 ## License
 
