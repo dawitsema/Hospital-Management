@@ -2,6 +2,10 @@
 export const en = {
   common: {
     home: "Home",
+    notFoundCode: "404",
+    notFoundTitle: "Page not found",
+    notFoundLead: "We couldn't find that page. It may have been removed, or the link may be incorrect.",
+    backToHome: "Back to home",
     about: "About",
     services: "Services",
     contact: "Contact",

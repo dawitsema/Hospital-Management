@@ -2,6 +2,10 @@
 export const am = {
   common: {
     home: "መነሻ",
+    notFoundCode: "404",
+    notFoundTitle: "ገጽ አልተገኘም",
+    notFoundLead: "ይህን ገጽ ማግኘት አልቻልንም። ተወግዷል፣ ወይም አገናኙ ሊሳሳት ይችላል።",
+    backToHome: "ወደ መነሻ ተመለስ",
     about: "ስለ እኛ",
     services: "አገልግሎቶች",
     contact: "ያግኙን",

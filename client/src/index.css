@@ -428,3 +428,43 @@ h2 {
   font-size: 1.15rem;
   margin: 0 0 1rem;
 }
+
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(160deg, #f0fdfa 0%, #f1f5f9 45%, #e2e8f0 100%);
+}
+
+.not-found-card {
+  max-width: 26rem;
+  width: 100%;
+  text-align: center;
+}
+
+.not-found-card h1 {
+  font-size: 1.35rem;
+  margin: 0 0 0.75rem;
+}
+
+.not-found-card .muted {
+  margin: 0 0 1.25rem;
+  line-height: 1.55;
+}
+
+.not-found-code {
+  margin: 0 0 0.5rem;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.not-found-card .btn {
+  display: inline-flex;
+  justify-content: center;
+  text-decoration: none;
+}
