@@ -1,5 +1,11 @@
 const base = typeof import.meta.env.VITE_API_URL === "string" ? import.meta.env.VITE_API_URL.replace(/\/$/, "") : "";
 
+if (import.meta.env.PROD && !base) {
+  console.error(
+    "[api] VITE_API_URL is empty in this build: requests go to this site’s /api and will 404 on Vercel. Set VITE_API_URL to your Render URL (no trailing slash) and redeploy."
+  );
+}
+
 function authHeader() {
   const token = localStorage.getItem("token");
   return token ? { Authorization: `Bearer ${token}` } : {};
