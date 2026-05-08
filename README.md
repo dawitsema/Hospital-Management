@@ -90,8 +90,8 @@ Send `Authorization: Bearer <token>` on protected routes.
 
 ## Academic context
 
-- **Course:** Software Evolution and Maintence
-- **Instructor:** Hayelom Muleta
+- **Course:** Selected Topics in Software Engineering
+- **Instructor:** GIZATE D.
 - **University:** Addis Ababa Science and Technology University
 
 ## Project layout
