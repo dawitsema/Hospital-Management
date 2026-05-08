@@ -84,7 +84,9 @@ Send `Authorization: Bearer <token>` on protected routes.
 3. Delal Mohammad - ETS 0482/14  
 4. Eden Melaku - ETS 0496/14  
 5. Eyerusalem Kidane - ETS 0574/14  
-6. Gelila Nebiyu - ETS 0690/14  
+6. Gelila Nebiyu - ETS 0690/14
+7. Hana Abiyu - ETS0728/14
+
 
 ## Academic context
 
